@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ontology Project User Guide | 本体建模类项目使用说明书</title>
+    <style>
+      :root {
+        --bg: #f3f6f8;
+        --surface: #ffffff;
+        --surface-soft: #f8fafc;
+        --text: #17202c;
+        --muted: #667085;
+        --line: #d9e2ea;
+        --blue: #176b87;
+        --blue-dark: #0f4f66;
+        --green: #157a5c;
+        --amber: #a86613;
+        --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--text);
+        background: var(--bg);
+        font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+        line-height: 1.72;
+      }
+
+      body[data-lang="zh"] [data-en],
+      body[data-lang="en"] [data-zh] {
+        display: none !important;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      .shell {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 28px 22px 58px;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        margin: -28px -22px 20px;
+        padding: 14px 22px;
+        background: rgba(243, 246, 248, 0.88);
+        border-bottom: 1px solid rgba(217, 226, 234, 0.9);
+        backdrop-filter: blur(14px);
+      }
+
+      .topbar-inner {
+        max-width: 1180px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+      }
+
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+        display: grid;
+        place-items: center;
+        flex: 0 0 auto;
+        border-radius: 8px;
+        background: var(--blue);
+        color: #ffffff;
+        font-weight: 800;
+      }
+
+      .brand strong {
+        display: block;
+        line-height: 1.25;
+      }
+
+      .brand span {
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .lang-switch {
+        display: inline-grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px;
+        padding: 4px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+      }
+
+      .lang-switch button {
+        min-width: 72px;
+        border: 0;
+        border-radius: 6px;
+        padding: 8px 10px;
+        color: var(--muted);
+        background: transparent;
+        cursor: pointer;
+        font-weight: 700;
+      }
+
+      body[data-lang="zh"] .lang-switch [data-set-lang="zh"],
+      body[data-lang="en"] .lang-switch [data-set-lang="en"] {
+        color: #ffffff;
+        background: var(--blue);
+      }
+
+      .hero,
+      .toc,
+      .section,
+      .summary-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+      }
+
+      .hero {
+        padding: 34px;
+        background:
+          linear-gradient(90deg, rgba(23, 107, 135, 0.1), transparent 55%),
+          #ffffff;
+      }
+
+      .eyebrow {
+        margin-bottom: 8px;
+        color: var(--blue-dark);
+        font-size: 13px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        max-width: 880px;
+        font-size: 34px;
+        line-height: 1.22;
+      }
+
+      .lead {
+        max-width: 920px;
+        margin-top: 14px;
+        color: #344054;
+      }
+
+      .meta-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .summary-card {
+        padding: 15px;
+        box-shadow: none;
+        background: var(--surface-soft);
+      }
+
+      .summary-card strong {
+        display: block;
+        color: var(--blue-dark);
+        font-size: 18px;
+      }
+
+      .summary-card span {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .toc {
+        margin-top: 18px;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .toc a {
+        display: block;
+        padding: 10px 12px;
+        color: var(--blue-dark);
+        background: #edf7fa;
+        border: 1px solid #cbe3ea;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .section {
+        margin-top: 18px;
+        padding: 26px;
+      }
+
+      .step-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .step-no {
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        flex: 0 0 auto;
+        color: #ffffff;
+        background: var(--blue);
+        border-radius: 8px;
+        font-weight: 800;
+      }
+
+      h2 {
+        font-size: 24px;
+        line-height: 1.28;
+      }
+
+      h3 {
+        margin: 18px 0 8px;
+        font-size: 18px;
+      }
+
+      ul,
+      ol {
+        margin: 12px 0 0;
+        padding-left: 22px;
+      }
+
+      li {
+        margin-bottom: 5px;
+      }
+
+      .callout {
+        margin-top: 14px;
+        padding: 13px 14px;
+        border-left: 4px solid var(--amber);
+        background: #fff8e8;
+        border-radius: 8px;
+      }
+
+      .callout.success {
+        border-left-color: var(--green);
+        background: #eaf7f1;
+      }
+
+      .screenshot {
+        margin-top: 18px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        overflow: hidden;
+        background: #ffffff;
+      }
+
+      .screenshot img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .caption {
+        padding: 10px 12px;
+        color: var(--muted);
+        background: #f8fafc;
+        font-size: 13px;
+      }
+
+      code {
+        padding: 2px 5px;
+        background: #eef2f7;
+        border-radius: 5px;
+      }
+
+      pre {
+        overflow: auto;
+        padding: 14px;
+        color: #d7f6ff;
+        background: #111827;
+        border-radius: 8px;
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 14px;
+      }
+
+      .mini-card {
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface-soft);
+      }
+
+      @media (max-width: 900px) {
+        .toc,
+        .meta-grid,
+        .two-col {
+          grid-template-columns: 1fr;
+        }
+
+        .hero,
+        .section {
+          padding: 20px;
+        }
+
+        .topbar-inner {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body data-lang="zh">
+    <div class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-mark">BA</div>
+          <div>
+            <strong data-zh>本体建模类项目使用说明书</strong>
+            <strong data-en>Ontology Modeling Project User Guide</strong>
+            <span data-zh>售前业务架构师工作台</span>
+            <span data-en>Pre-sales Business Architecture Workbench</span>
+          </div>
+        </div>
+        <div class="lang-switch" aria-label="Language switch">
+          <button type="button" data-set-lang="zh">中文</button>
+          <button type="button" data-set-lang="en">English</button>
+        </div>
+      </div>
+    </div>
+
+    <main class="shell">
+      <section class="hero">
+        <p class="eyebrow">Formal Guide</p>
+        <h1 data-zh>本体建模类项目使用说明书</h1>
+        <h1 data-en>Ontology Modeling Project User Guide</h1>
+        <p class="lead" data-zh>
+          本说明书面向售前业务架构师，说明如何使用工作台处理本体建模类项目：从甲方资料汇入，到业务对象、关系、属性、动作、规则和语义映射的结构化，再到功能蓝图和正式文档输出。
+        </p>
+        <p class="lead" data-en>
+          This guide is designed for pre-sales business architects. It explains how to use the workbench for ontology modeling projects, from collecting client materials to structuring business objects, relationships, attributes, actions, rules, semantic mappings, functional blueprints, and formal deliverables.
+        </p>
+        <div class="meta-grid">
+          <div class="summary-card"><strong>7</strong><span data-zh>核心步骤</span><span data-en>Core steps</span></div>
+          <div class="summary-card"><strong>Ontology</strong><span data-zh>本体建模场景</span><span data-en>Ontology scenario</span></div>
+          <div class="summary-card"><strong>AI Draft</strong><span data-zh>草稿确认机制</span><span data-en>Draft confirmation</span></div>
+          <div class="summary-card"><strong>Docs</strong><span data-zh>正式文档输出</span><span data-en>Formal documents</span></div>
+        </div>
+      </section>
+
+      <nav class="toc">
+        <a href="#overview" data-zh>1. 项目总览</a><a href="#overview" data-en>1. Overview</a>
+        <a href="#sources" data-zh>2. 资料汇入</a><a href="#sources" data-en>2. Sources</a>
+        <a href="#analysis" data-zh>3. 分析结果</a><a href="#analysis" data-en>3. Analysis</a>
+        <a href="#scope" data-zh>4. 范围确认</a><a href="#scope" data-en>4. Scope</a>
+        <a href="#architecture" data-zh>5. 本体架构</a><a href="#architecture" data-en>5. Ontology Architecture</a>
+        <a href="#blueprint" data-zh>6. 功能蓝图</a><a href="#blueprint" data-en>6. Blueprint</a>
+        <a href="#documents" data-zh>7. 文档中心</a><a href="#documents" data-en>7. Documents</a>
+        <a href="#start" data-zh>启动方式</a><a href="#start" data-en>Launch</a>
+      </nav>
+
+      <section id="start" class="section">
+        <h2 data-zh>启动方式</h2>
+        <h2 data-en>Launch</h2>
+        <p data-zh>如果你只阅读本说明书，可直接打开本 HTML。若要使用工作台，请在项目目录启动服务：</p>
+        <p data-en>You can open this HTML directly for reading. To use the workbench, start the local service from the project directory:</p>
+        <pre><code>cd "C:\Users\GarsenPC\Documents\New project"
+npm.cmd run dev</code></pre>
+      </section>
+
+      <section id="overview" class="section">
+        <div class="step-head"><span class="step-no">1</span><h2 data-zh>项目总览：选择本体建模类项目</h2><h2 data-en>Project Overview: Select Ontology Modeling</h2></div>
+        <p data-zh>首先确认客户、项目名称、当前阶段，并把项目类型选择为“本体建模类”。这会让后续分析围绕对象、关系、属性、动作、规则和语义映射展开。</p>
+        <p data-en>First confirm the client, project name, and current stage, then set the project type to “Ontology Modeling”. This makes later analysis focus on objects, relationships, attributes, actions, rules, and semantic mappings.</p>
+        <ul data-zh>
+          <li>填写客户名称和项目名称。</li>
+          <li>项目类型选择“本体建模类”。</li>
+          <li>确认当前阶段，例如售前调研、方案设计或招标支持。</li>
+          <li>点击“进入资料汇入”。</li>
+        </ul>
+        <ul data-en>
+          <li>Enter the client name and project name.</li>
+          <li>Select “Ontology Modeling” as the project type.</li>
+          <li>Confirm the current stage, such as discovery, solution design, or tender support.</li>
+          <li>Click “Go to Source Intake”.</li>
+        </ul>
+        <div class="callout" data-zh>不要一进来就分析。先把项目上下文定准，模型才知道应该按本体建模方法分析资料。</div>
+        <div class="callout" data-en>Do not start analysis immediately. Confirm the project context first so the model applies the ontology modeling framework correctly.</div>
+        <div class="screenshot"><img src="manual-assets/01-overview.png" alt="Project overview" /><div class="caption" data-zh>真实截图：项目总览页面。</div><div class="caption" data-en>Actual screenshot: project overview page.</div></div>
+      </section>
+
+      <section id="sources" class="section">
+        <div class="step-head"><span class="step-no">2</span><h2 data-zh>资料汇入：准备本体建模输入</h2><h2 data-en>Source Intake: Prepare Ontology Inputs</h2></div>
+        <p data-zh>本体项目最需要的输入包括业务术语、业务对象描述、系统清单、流程材料、数据资产清单、指标口径和访谈纪要。</p>
+        <p data-en>Ontology projects need inputs such as business terms, object descriptions, system lists, process materials, data asset lists, metric definitions, and interview notes.</p>
+        <ul data-zh>
+          <li>粘贴会议纪要、访谈记录、客户需求描述。</li>
+          <li>上传制度文件、业务流程文档、数据字典、指标清单。</li>
+          <li>点击“保存资料”只保存，不调用模型。</li>
+          <li>资料和模型配置齐备后，“分析资料”才会启用。</li>
+        </ul>
+        <ul data-en>
+          <li>Paste meeting notes, interview records, and client requirement descriptions.</li>
+          <li>Upload policies, process documents, data dictionaries, and metric catalogs.</li>
+          <li>“Save Sources” only stores the input and does not call the model.</li>
+          <li>“Analyze Sources” is enabled only when both sources and model configuration are ready.</li>
+        </ul>
+        <div class="callout success" data-zh>点击分析后会显示步骤状态：整理输入资料、调用大模型、接收结果、解析结果、生成草稿。</div>
+        <div class="callout success" data-en>After clicking analyze, the page shows progress states: preparing input, calling the model, receiving results, parsing results, and generating a draft.</div>
+        <div class="screenshot"><img src="manual-assets/02-sources.png" alt="Source intake" /><div class="caption" data-zh>真实截图：资料汇入页面。</div><div class="caption" data-en>Actual screenshot: source intake page.</div></div>
+      </section>
+
+      <section id="analysis" class="section">
+        <div class="step-head"><span class="step-no">3</span><h2 data-zh>分析结果：先确认 AI 草稿</h2><h2 data-en>Analysis Results: Confirm the AI Draft First</h2></div>
+        <p data-zh>AI 分析不会直接覆盖工作台，而是生成草稿。你需要确认它识别的对象、关系、功能和问题是否符合甲方语境。</p>
+        <p data-en>The AI output does not overwrite the workbench directly. It first becomes a draft, and you decide whether it should be applied.</p>
+        <div class="two-col">
+          <div class="mini-card" data-zh><strong>检查重点</strong><br />项目理解、建议范围、业务对象、对象关系、功能草稿、待确认问题。</div>
+          <div class="mini-card" data-zh><strong>可选操作</strong><br />应用到工作台、重新分析、返回补充资料、放弃本次结果。</div>
+          <div class="mini-card" data-en><strong>Review Focus</strong><br />Project summary, proposed scope, business objects, relationships, function drafts, and open questions.</div>
+          <div class="mini-card" data-en><strong>Available Actions</strong><br />Apply to workbench, rerun analysis, return to sources, or discard the draft.</div>
+        </div>
+        <div class="screenshot"><img src="manual-assets/03-analysis.png" alt="Analysis draft" /><div class="caption" data-zh>真实截图：分析结果草稿页面。</div><div class="caption" data-en>Actual screenshot: analysis draft page.</div></div>
+      </section>
+
+      <section id="scope" class="section">
+        <div class="step-head"><span class="step-no">4</span><h2 data-zh>范围确认：定义本体建模边界</h2><h2 data-en>Scope Confirmation: Define Ontology Boundaries</h2></div>
+        <p data-zh>本体类项目的范围确认重点不是“功能越多越好”，而是明确本期建哪些对象、关系和规则，哪些留到后续。</p>
+        <p data-en>For ontology projects, scope confirmation is not about adding more features. It is about defining which objects, relationships, and rules are included in the current phase.</p>
+        <ul data-zh>
+          <li>本期必须做：核心业务对象、核心关系、关键规则。</li>
+          <li>本期建议做：对象与数据资产映射、语义检索场景。</li>
+          <li>后续再做：复杂推理、自动生成技术模型。</li>
+          <li>明确不做：超出本期交付边界的深度系统改造。</li>
+        </ul>
+        <ul data-en>
+          <li>Must-have: core business objects, key relationships, and critical rules.</li>
+          <li>Recommended: object-to-data-asset mapping and semantic search scenarios.</li>
+          <li>Later: advanced reasoning and automatic technical model generation.</li>
+          <li>Out of scope: deep system transformation outside the current delivery boundary.</li>
+        </ul>
+        <div class="screenshot"><img src="manual-assets/04-scope.png" alt="Scope confirmation" /><div class="caption" data-zh>真实截图：范围确认页面。</div><div class="caption" data-en>Actual screenshot: scope confirmation page.</div></div>
+      </section>
+
+      <section id="architecture" class="section">
+        <div class="step-head"><span class="step-no">5</span><h2 data-zh>业务架构：沉淀本体结构</h2><h2 data-en>Business Architecture: Build the Ontology Structure</h2></div>
+        <p data-zh>本体建模类项目在业务架构页重点维护业务对象、关系、属性、动作、规则和语义映射。</p>
+        <p data-en>For ontology modeling projects, the architecture page focuses on business objects, relationships, attributes, actions, rules, and semantic mappings.</p>
+        <ul data-zh>
+          <li>对象：客户、合同、项目、指标、数据资产、审批单等。</li>
+          <li>关系：客户拥有合同、合同关联项目、指标来源于数据资产。</li>
+          <li>属性：对象的关键业务属性，不是数据库字段设计。</li>
+          <li>动作：创建、审批、发布、归档、下线等业务动作。</li>
+          <li>规则：审批规则、发布规则、口径规则、权限规则。</li>
+        </ul>
+        <ul data-en>
+          <li>Objects: customer, contract, project, metric, data asset, approval request, and more.</li>
+          <li>Relationships: customer owns contract, contract links to project, metric derives from data asset.</li>
+          <li>Attributes: key business attributes of the object, not database field design.</li>
+          <li>Actions: create, approve, publish, archive, deactivate, and other business actions.</li>
+          <li>Rules: approval rules, publishing rules, metric definition rules, and permission rules.</li>
+        </ul>
+        <div class="screenshot"><img src="manual-assets/05-architecture.png" alt="Business architecture" /><div class="caption" data-zh>真实截图：业务架构页面。</div><div class="caption" data-en>Actual screenshot: business architecture page.</div></div>
+      </section>
+
+      <section id="blueprint" class="section">
+        <div class="step-head"><span class="step-no">6</span><h2 data-zh>功能蓝图：从本体结构生成功能</h2><h2 data-en>Functional Blueprint: Derive Features from Ontology</h2></div>
+        <p data-zh>本体结构确认后，功能蓝图可以自然拆出对象建模、关系建模、属性维护、规则管理、语义检索、对象与数据映射等功能。</p>
+        <p data-en>After the ontology structure is confirmed, the functional blueprint can derive capabilities such as object modeling, relationship modeling, attribute maintenance, rule management, semantic search, and object-to-data mapping.</p>
+        <ul data-zh>
+          <li>P1：对象建模、关系建模、属性维护、版本管理。</li>
+          <li>P2：规则管理、对象与数据资产映射、语义检索。</li>
+          <li>P3：复杂推理、自动推荐、跨系统高级联动。</li>
+        </ul>
+        <ul data-en>
+          <li>P1: object modeling, relationship modeling, attribute maintenance, and versioning.</li>
+          <li>P2: rule management, object-to-data-asset mapping, and semantic search.</li>
+          <li>P3: advanced reasoning, automatic recommendations, and cross-system orchestration.</li>
+        </ul>
+        <div class="screenshot"><img src="manual-assets/06-blueprint.png" alt="Functional blueprint" /><div class="caption" data-zh>真实截图：功能蓝图页面。</div><div class="caption" data-en>Actual screenshot: functional blueprint page.</div></div>
+      </section>
+
+      <section id="documents" class="section">
+        <div class="step-head"><span class="step-no">7</span><h2 data-zh>文档中心：输出本体项目材料</h2><h2 data-en>Document Center: Generate Ontology Deliverables</h2></div>
+        <p data-zh>最后再生成文档。适合本体类项目的输出包括本体建模方案、业务对象建模说明书、语义模型技术规格书、交付实施蓝图和招标文件技术章节。</p>
+        <p data-en>Document generation should happen last. Suitable outputs include ontology modeling proposals, business object modeling specifications, semantic model technical specifications, delivery blueprints, and tender technical chapters.</p>
+        <ul data-zh>
+          <li>选择文档类型。</li>
+          <li>选择默认模板或粘贴公司/甲方模板。</li>
+          <li>满足生成条件后点击“生成当前文档”。</li>
+          <li>生成后复制 Markdown，再进入 Word 或 PPT 排版。</li>
+        </ul>
+        <ul data-en>
+          <li>Select the target document type.</li>
+          <li>Select a default template or paste a company/client template.</li>
+          <li>Click “Generate Document” when all readiness checks are satisfied.</li>
+          <li>Copy the Markdown output and continue formatting in Word or PowerPoint.</li>
+        </ul>
+        <div class="screenshot"><img src="manual-assets/07-documents.png" alt="Document center" /><div class="caption" data-zh>真实截图：文档中心页面。</div><div class="caption" data-en>Actual screenshot: document center page.</div></div>
+      </section>
+    </main>
+
+    <script>
+      const stored = localStorage.getItem("ontology-guide-lang");
+      if (stored === "zh" || stored === "en") document.body.dataset.lang = stored;
+      document.querySelectorAll("[data-set-lang]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const lang = button.dataset.setLang;
+          document.body.dataset.lang = lang;
+          localStorage.setItem("ontology-guide-lang", lang);
+          document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+        });
+      });
+    </script>
+  </body>
+</html>
