@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Presales Architect Workbench</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">PA</div>
+          <div>
+            <h1 data-i18n="appName">售前业务架构师工作台</h1>
+            <p data-i18n="appTagline">从客户资料到范围、架构、功能蓝图和正式文档。</p>
+          </div>
+        </div>
+
+        <div class="language-switch" aria-label="Language">
+          <button class="lang-btn active" data-lang="zh">中文</button>
+          <button class="lang-btn" data-lang="en">English</button>
+        </div>
+
+        <nav class="nav-list" aria-label="Main navigation">
+          <button class="nav-item active" data-view="overview" data-i18n="navOverview">项目总览</button>
+          <button class="nav-item" data-view="sources" data-i18n="navSources">资料汇入</button>
+          <button class="nav-item" data-view="analysis" data-i18n="navAnalysis">分析确认</button>
+          <button class="nav-item" data-view="scope" data-i18n="navScope">范围确认</button>
+          <button class="nav-item" data-view="architecture" data-i18n="navArchitecture">业务架构</button>
+          <button class="nav-item" data-view="blueprint" data-i18n="navBlueprint">功能蓝图</button>
+          <button class="nav-item" data-view="documents" data-i18n="navDocuments">文档中心</button>
+          <button class="nav-item" data-view="settings" data-i18n="navSettings">模型配置</button>
+        </nav>
+
+        <div class="sidebar-note">
+          <span></span>
+          <p data-i18n="sidebarNote">对象建模不再强制出现；系统会按项目类型切换结构化重点。</p>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Architect Journey</p>
+            <h2 id="topTitle">项目总览</h2>
+          </div>
+          <div class="topbar-actions">
+            <a class="ghost-btn" href="/ontology-guide-bilingual.html" target="_blank" data-i18n="openGuide">双语说明书</a>
+            <button id="goSettingsTop" class="ghost-btn" data-i18n="modelSettings">模型配置</button>
+            <button id="goSourcesTop" class="primary-btn" data-i18n="startInput">开始录入资料</button>
+          </div>
+        </header>
+
+        <section id="notice" class="notice hidden" role="status"></section>
+
+        <section class="view active" id="view-overview">
+          <div class="overview-grid">
+            <section class="panel hero-panel">
+              <div class="section-head">
+                <div>
+                  <p class="eyebrow" data-i18n="currentProject">当前项目</p>
+                  <h3 id="projectNameDisplay">-</h3>
+                </div>
+                <span id="projectTypeBadge" class="status-pill">-</span>
+              </div>
+              <p id="projectSummary" class="lead"></p>
+
+              <div class="project-form">
+                <label><span data-i18n="clientName">客户名称</span><input id="clientName" type="text" /></label>
+                <label><span data-i18n="projectName">项目名称</span><input id="projectName" type="text" /></label>
+                <label><span data-i18n="projectType">项目类型</span><select id="projectType"></select></label>
+                <label><span data-i18n="projectStage">当前阶段</span><select id="projectStage"></select></label>
+              </div>
+              <div class="action-row">
+                <button id="saveProjectInfo" class="primary-btn" data-i18n="saveProject">保存项目信息</button>
+                <button id="goSources" class="ghost-btn" data-i18n="goSources">进入资料汇入</button>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="section-head">
+                <h3 data-i18n="readiness">准备度</h3>
+                <span id="completionText" class="subtle">0%</span>
+              </div>
+              <div id="readinessList" class="check-list"></div>
+              <div class="metric-row">
+                <div><strong id="metricSources">0</strong><span data-i18n="metricSources">资料</span></div>
+                <div><strong id="metricScope">0</strong><span data-i18n="metricScope">范围项</span></div>
+                <div><strong id="metricArchitecture">0</strong><span data-i18n="metricArchitecture">架构要素</span></div>
+                <div><strong id="metricQuestions">0</strong><span data-i18n="metricQuestions">待确认</span></div>
+              </div>
+            </section>
+          </div>
+
+          <section class="panel">
+            <div class="section-head">
+              <h3 data-i18n="storyTitle">使用故事线</h3>
+              <span class="subtle" data-i18n="storySubtitle">按售前架构师的真实工作顺序组织</span>
+            </div>
+            <div id="storyline" class="storyline"></div>
+          </section>
+        </section>
+
+        <section class="view" id="view-sources">
+          <div class="content-grid two-columns">
+            <section class="panel">
+              <div class="section-head">
+                <h3 data-i18n="sourceInput">资料输入</h3>
+                <button id="clearSources" class="ghost-btn" data-i18n="clearSources">清空资料</button>
+              </div>
+              <label class="field-label" for="sourceText" data-i18n="sourceTextLabel">会议纪要、访谈记录、背景材料</label>
+              <textarea id="sourceText" class="large-textarea"></textarea>
+              <div class="file-drop">
+                <input id="sourceFiles" type="file" multiple accept=".txt,.md,.markdown,.doc,.docx,.pdf,.xls,.xlsx,.ppt,.pptx" />
+                <strong data-i18n="uploadSources">上传项目资料</strong>
+                <span data-i18n="uploadHint">txt / md 会读取正文；其它文件先记录文件名。</span>
+              </div>
+              <div id="sourceFileList" class="file-list"></div>
+              <div id="sourceGate" class="gate-hint"></div>
+              <div class="action-row">
+                <button id="saveSources" class="ghost-btn" data-i18n="saveSources">保存资料</button>
+                <button id="analyzeSources" class="primary-btn" data-i18n="analyzeSources">开始分析</button>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="section-head">
+                <h3 data-i18n="analysisState">分析状态</h3>
+                <span id="analysisStatus" class="subtle"></span>
+              </div>
+              <p class="muted-block" data-i18n="analysisExplain">完成资料输入并配置模型后，点击开始分析。结果会先进入确认页，不会自动覆盖工作台。</p>
+              <div id="analysisSteps" class="step-list"></div>
+              <div id="analysisLog" class="log-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="view-analysis">
+          <section class="panel">
+            <div class="section-head">
+              <div>
+                <h3 data-i18n="draftTitle">分析结果草稿</h3>
+                <p class="subtle" data-i18n="draftSubtitle">确认后再应用到范围、架构、蓝图和问题清单。</p>
+              </div>
+              <span id="draftStatus" class="status-pill"></span>
+            </div>
+            <div id="analysisDraft" class="draft-view"></div>
+            <div class="action-row">
+              <button id="applyAnalysisDraft" class="primary-btn" data-i18n="applyDraft">应用到工作台</button>
+              <button id="rerunAnalysis" class="ghost-btn" data-i18n="rerunAnalysis">重新分析</button>
+              <button id="backToSources" class="ghost-btn" data-i18n="backToSources">返回补充资料</button>
+              <button id="discardAnalysisDraft" class="ghost-btn" data-i18n="discardDraft">放弃草稿</button>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="view-scope">
+          <section class="panel">
+            <div class="section-head">
+              <div>
+                <h3 data-i18n="scopeTitle">范围确认画布</h3>
+                <p id="scopeHint" class="subtle"></p>
+              </div>
+              <button id="addScopeItem" class="ghost-btn" data-i18n="addScope">新增范围项</button>
+            </div>
+            <div id="scopeBoard" class="scope-board"></div>
+          </section>
+        </section>
+
+        <section class="view" id="view-architecture">
+          <div class="content-grid two-columns">
+            <section class="panel">
+              <div class="section-head">
+                <div>
+                  <h3 data-i18n="architectureTitle">业务架构画布</h3>
+                  <p id="architectureHint" class="subtle"></p>
+                </div>
+                <button id="addArchitectureItem" class="ghost-btn" data-i18n="addArchitecture">新增要素</button>
+              </div>
+              <div id="architectureMap" class="architecture-map"></div>
+            </section>
+            <section class="panel">
+              <div class="section-head">
+                <h3 data-i18n="questionsTitle">待确认问题</h3>
+                <button id="addQuestion" class="ghost-btn" data-i18n="addQuestion">新增问题</button>
+              </div>
+              <div id="questionList" class="question-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="view-blueprint">
+          <section class="panel">
+            <div class="section-head">
+              <div>
+                <h3 data-i18n="blueprintTitle">功能蓝图</h3>
+                <p class="subtle" data-i18n="blueprintSubtitle">把范围和架构转成可拆解、可验收的功能清单。</p>
+              </div>
+              <button id="addFeature" class="ghost-btn" data-i18n="addFeature">新增功能</button>
+            </div>
+            <div id="featureBoard" class="feature-board"></div>
+          </section>
+        </section>
+
+        <section class="view" id="view-documents">
+          <div class="content-grid two-columns">
+            <section class="panel">
+              <div class="section-head">
+                <h3 data-i18n="documentGenerate">文档生成</h3>
+                <span id="documentStatus" class="subtle"></span>
+              </div>
+              <label class="field-label" for="docType" data-i18n="docType">目标文档</label>
+              <select id="docType"></select>
+              <label class="field-label" for="templateSelect" data-i18n="template">文档模板</label>
+              <select id="templateSelect"></select>
+              <label class="field-label" for="templateText" data-i18n="templateText">模板目录 / 正文片段</label>
+              <textarea id="templateText"></textarea>
+              <div class="file-drop compact-drop">
+                <input id="templateFiles" type="file" multiple accept=".txt,.md,.markdown,.doc,.docx,.pdf" />
+                <strong data-i18n="uploadTemplate">上传模板文件</strong>
+                <span data-i18n="templateUploadHint">txt / md 会读取正文；Word / PDF 先记录文件名。</span>
+              </div>
+              <div id="templateFileList" class="file-list"></div>
+              <div id="documentGate" class="gate-hint"></div>
+              <div id="documentSteps" class="step-list"></div>
+              <button id="generateDocument" class="primary-btn full" data-i18n="generateDocument">生成当前文档</button>
+            </section>
+            <section class="panel document-preview-panel">
+              <div class="section-head">
+                <h3 id="documentTitle" data-i18n="documentPreview">文档预览</h3>
+                <button id="copyDocument" class="ghost-btn" data-i18n="copyMarkdown">复制 Markdown</button>
+              </div>
+              <article id="documentPreview" class="document-preview"></article>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="view-settings">
+          <div class="content-grid two-columns">
+            <section class="panel">
+              <div class="section-head">
+                <h3 data-i18n="modelConfig">模型配置</h3>
+                <span class="subtle" data-i18n="apiKeyNote">API Key 仅保存在当前浏览器会话。</span>
+              </div>
+              <label class="field-label" for="provider" data-i18n="provider">服务商</label>
+              <select id="provider"></select>
+              <label class="field-label" for="apiBase">API Base URL</label>
+              <input id="apiBase" type="text" />
+              <label class="field-label" for="apiKey">API Key</label>
+              <input id="apiKey" type="password" autocomplete="off" />
+              <label class="field-label" for="model" data-i18n="modelName">模型名称</label>
+              <input id="model" type="text" />
+              <div class="two-fields">
+                <label><span data-i18n="temperature">温度</span><input id="temperature" type="number" min="0" max="1" step="0.1" value="0.2" /></label>
+                <label><span data-i18n="maxTokens">最大输出长度</span><input id="maxTokens" type="number" min="800" max="16000" step="500" value="8000" /></label>
+              </div>
+              <label class="check-line"><input id="jsonMode" type="checkbox" checked /><span data-i18n="jsonMode">结构化分析启用 JSON 模式</span></label>
+              <div class="action-row">
+                <button id="testModel" class="primary-btn" data-i18n="testModel">测试连接</button>
+                <button id="clearModelConfig" class="ghost-btn" data-i18n="clearConfig">清除配置</button>
+              </div>
+              <div id="modelStatus" class="notice inline hidden"></div>
+            </section>
+
+            <section class="panel">
+              <div class="section-head">
+                <h3 data-i18n="releaseChecklist">正式版检查点</h3>
+              </div>
+              <div id="releaseChecklist" class="principle-list"></div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

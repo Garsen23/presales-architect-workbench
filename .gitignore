@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Local environment and secrets
+.env
+.env.local
+.env.*.local
+
+# Codex / agent local configuration
+.codex/
+.agents/
+.claude-flow/data/
+.claude-flow/logs/
+
+# Runtime and caches
+__pycache__/
+*.log
+npm-debug.log*
+
+# Local outputs and temporary reports
+outputs/
+*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db
