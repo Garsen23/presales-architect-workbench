@@ -1,103 +1,133 @@
 # Presales Architect Workbench
 
-> Turn scattered client conversations into delivery-ready project materials.
+> Standardize presales work, turn field knowledge into reusable enterprise assets, and generate delivery-ready materials from client inputs.
 
-**Presales Architect Workbench** is a bilingual workspace for presales business architects. It helps you collect client inputs, clarify project scope, model the right business architecture, shape a feature blueprint, and generate documents that delivery teams can actually use.
+**Presales Architect Workbench** is a bilingual operating workspace for enterprise presales teams. It helps architects transform scattered customer conversations, uploaded materials, product capabilities and internal delivery knowledge into standardized scope definitions, solution blueprints, feature combinations and formal project documents.
 
 中文名：**售前业务架构师工作台**
 
 ![Project overview](public/manual-assets/01-overview.png)
 
-## Why This Exists
+## Product Positioning
 
-In many ToB projects, the hardest part is not writing code. The hard part is translating incomplete client input into something a delivery team can implement:
+Enterprise presales work often depends heavily on individual experience. Different architects may ask different questions, write different documents, use different solution structures, and hand over work to delivery teams in inconsistent formats.
 
-- What is in scope, what is out of scope, and what is still uncertain?
-- Which business objects, governance objects, systems, roles and processes matter?
-- Which requirements are confirmed facts, and which are only assumptions?
-- How do we turn meeting notes into a technical specification, tender document or delivery blueprint?
+This project is designed to change that.
 
-This workbench is designed for that messy presales middle layer. It is not a simple questionnaire, and it is not just a document generator. It is a structured thinking tool for architects.
+It turns presales from a personal craft into a repeatable operating process:
 
-## The Product Story
+- standardize how requirements are collected
+- standardize how scope is confirmed
+- standardize how architecture and feature blueprints are produced
+- standardize how open questions and risks are tracked
+- standardize how tender documents, technical specifications and delivery materials are generated
 
-Imagine you just finished a client workshop.
+The long-term goal is not only to build a document tool. The goal is to become a **presales workflow operating layer** for enterprise ToB teams.
 
-You have meeting notes, screenshots, partial documents, business pain points, and a few unclear expectations. Instead of writing a long document from scratch, you open the workbench and move through one story:
+## Core Value
 
-1. **Create the project**  
-   Select whether it is a big data platform, data governance, ontology modeling, custom software, or a hybrid project.
+### 1. From Presales Experience to SOP
 
-2. **Import the materials**  
-   Paste meeting notes or upload files. The tool waits for your input and will not start analysis before the materials are ready.
+The workbench packages the key steps of presales architecture work into a clear SOP:
 
-3. **Run AI analysis**  
-   Configure Kimi, GLM, DeepSeek, MiniMax, Qwen, Doubao, OpenAI, OpenRouter or another OpenAI-compatible model.
+1. create a project
+2. import customer materials
+3. run structured analysis
+4. review AI-generated drafts
+5. confirm scope
+6. shape business architecture
+7. assemble feature blueprints
+8. generate formal documents
 
-4. **Review the draft**  
-   AI output first lands in a review page. You decide whether to apply it to the workspace.
-
-5. **Shape the architecture**  
-   Edit scope, architecture elements, open questions and feature blueprint manually.
-
-6. **Generate formal documents**  
-   Export tender drafts, technical specifications, project statements, delivery blueprints and development briefs.
+This makes presales output more stable across teams, regions and project types.
 
 ![Source input](public/manual-assets/02-sources.png)
 
-## What Makes It Different
+### 2. From Scattered Inputs to Structured Delivery Assets
 
-### It Does Not Force Ontology Modeling Everywhere
+Client workshops, meeting notes and uploaded files are usually fragmented. The workbench turns them into structured assets that delivery teams can understand:
 
-Not every presales project needs object modeling.
+- project scope
+- architecture elements
+- business objects or governance objects
+- feature modules
+- acceptance criteria
+- risks and open questions
+- formal project documents
 
-The workbench changes its structure by project type:
-
-| Project Type | Modeling Focus |
-| --- | --- |
-| Big Data Platform | Platform capabilities, data flows, system boundaries, data services, security and operations |
-| Data Governance | Governance objects, standards, metrics, quality rules, accountability and workflows |
-| Ontology Modeling | Business objects, relations, attributes, actions, rules and semantic mappings |
-| Custom Software | Roles, processes, modules, business entities, state transitions and acceptance paths |
-| Hybrid Project | A combined structure based on the current project phase |
-
-### It Keeps Human Review in the Loop
-
-AI does not overwrite the workspace directly.
-
-Analysis results are first shown as a draft. The architect reviews the output, rejects weak assumptions, and only then applies it to the scope, architecture and blueprint canvas.
+AI is used as a structuring assistant, while the architect remains responsible for review and final judgment.
 
 ![Analysis review](public/manual-assets/03-analysis.png)
 
-### It Turns Uncertainty Into Work Items
+### 3. From Single Project Delivery to Enterprise Reuse
 
-Presales documents often look complete while hiding major assumptions. This tool treats uncertainty as a first-class object:
+For an enterprise with an internal product matrix, this workbench can evolve into a solution assembly layer.
 
-- open questions
-- unclear ownership
-- missing acceptance criteria
-- uncertain integration boundaries
-- assumptions that need client confirmation
+Instead of designing every proposal from scratch, the platform can connect customer requirements with internal products, modules and delivery templates:
 
-That makes the final material more useful for delivery teams.
+- match requirements to existing product capabilities
+- combine standard modules into industry solutions
+- reuse proven implementation patterns
+- reduce repeated proposal writing
+- improve consistency between sales promises and delivery capability
 
-## Core Workspace
+This is where the product becomes more than a presales note-taking tool. It becomes a bridge between **customer demand**, **enterprise product assets** and **delivery execution**.
+
+### 4. Agent-Ready Enterprise Integration
+
+The current version is a local workbench. The next step is to connect it with enterprise systems through agents.
+
+Potential integrations include:
+
+- CRM: customer profiles, opportunities, account history and sales stages
+- internal product platforms: product catalog, module capabilities and pricing references
+- knowledge bases: industry cases, best practices and delivery templates
+- project management systems: delivery tasks, milestones and acceptance plans
+- document systems: proposal libraries, tender templates and historical submissions
+
+With agents, the workbench can become the front office of a larger presales automation system.
+
+## Workflow Story
+
+Imagine a presales architect just finished a client workshop.
+
+The client described business pain points, uploaded partial documents, mentioned several existing systems, and asked for a proposal before the next meeting. The architect opens the workbench and follows a structured journey:
+
+1. **Set up the project**  
+   Enter the client name, project name, phase and project type.
+
+2. **Import customer materials**  
+   Paste meeting notes or upload files. The system waits for complete inputs and does not analyze before the architect starts the process.
+
+3. **Run AI-assisted analysis**  
+   Configure Kimi, GLM, DeepSeek, MiniMax, Qwen, Doubao, OpenAI, OpenRouter or another compatible model.
+
+4. **Review before applying**  
+   AI results are shown as drafts. The architect reviews assumptions before applying them to the workspace.
+
+5. **Confirm scope and architecture**  
+   The workbench helps convert uncertainty into explicit scope items, architecture elements and open questions.
+
+6. **Generate documents**  
+   The reviewed workspace becomes a source for tender documents, technical specifications, project statements and delivery blueprints.
+
+## Workspace Modules
 
 ### Scope Confirmation
 
-The scope canvas separates must-have items, suggested items, later-phase items and out-of-scope items. This helps align expectations before implementation begins.
+Scope is separated into must-have, suggested, later-phase and out-of-scope items. This helps the sales team, client and delivery team align before implementation starts.
 
 ![Scope canvas](public/manual-assets/04-scope.png)
 
 ### Business Architecture
 
-The architecture canvas captures the key elements that matter for the selected project type: governance objects, business objects, systems, processes, roles, rules and relationships.
+The architecture canvas captures the elements that matter for the project: systems, roles, processes, governance objects, business objects, rules and relationships.
 
 ![Business architecture](public/manual-assets/05-architecture.png)
 
 ### Feature Blueprint
 
-The feature blueprint turns architecture into implementable work: feature name, business goal, users, flow, priority and acceptance criteria.
+The feature blueprint converts architecture thinking into implementable modules, including users, goals, priorities and acceptance criteria.
 
 ![Feature blueprint](public/manual-assets/06-blueprint.png)
 
@@ -107,21 +137,28 @@ The document center generates formal materials from the reviewed workspace, not 
 
 Supported outputs include:
 
-- Presales proposal material
-- Business requirement document
-- Delivery implementation blueprint
-- Development task brief
-- Tender document
-- Technical specification
-- Project statement
+- presales proposal material
+- business requirement document
+- delivery implementation blueprint
+- development task brief
+- tender document
+- technical specification
+- project statement
 
-Templates can be provided by default or uploaded by the user.
+Templates can come from the default library or user-uploaded files.
 
 ![Document center](public/manual-assets/07-documents.png)
 
-## Bilingual Experience
+## Why Enterprises Would Use It
 
-The product supports Chinese and English switching in the main workbench and usage guide. It is suitable for local Chinese presales work while still being readable for bilingual teams, offshore delivery teams or international stakeholders.
+This product is valuable when a company wants to:
+
+- make presales output less dependent on individual consultants
+- shorten the time from customer research to proposal material
+- align sales commitments with real product and delivery capabilities
+- reuse product modules, solution patterns and historical project knowledge
+- create a consistent handover path from sales to delivery
+- prepare for an agent-based sales and solution automation system
 
 ## Model Providers
 
@@ -167,26 +204,27 @@ npm run dev
 
 ```text
 .
-├─ server.mjs                         # Static server and LLM proxy
-├─ public/
-│  ├─ index.html                      # Main workbench
-│  ├─ app.js                          # Workflow, state, bilingual UI and API calls
-│  ├─ styles.css                      # TOB workbench styling
-│  ├─ ontology-guide-bilingual.html   # Bilingual usage guide
-│  └─ manual-assets/                  # Real screenshots used in guide and README
-├─ package.json
-├─ README.md
-└─ .gitignore
+|-- server.mjs                         # Static server and LLM proxy
+|-- public/
+|   |-- index.html                      # Main workbench
+|   |-- app.js                          # Workflow, state, bilingual UI and API calls
+|   |-- styles.css                      # TOB workbench styling
+|   |-- ontology-guide-bilingual.html   # Bilingual usage guide
+|   `-- manual-assets/                  # Real screenshots used in guide and README
+|-- package.json
+|-- README.md
+`-- .gitignore
 ```
 
-## Recommended Use
+## Current Stage
 
-Use this workbench when you need to turn early project ambiguity into a delivery-ready structure:
+This repository is the formal demo version. It already includes the core workflow, bilingual UI, model provider configuration, review-before-apply logic, document generation flow and usage guide.
 
-- before writing a proposal
-- after client research workshops
-- before tender response preparation
-- before handing work to delivery teams
-- when a project mixes data platform, data governance, ontology and custom software requirements
+Future evolution can focus on:
 
-The best result comes from using AI as a structuring assistant, then letting the architect review, correct and finalize the material.
+- CRM integration agents
+- internal product matrix integration
+- solution module recommendation
+- document template governance
+- delivery task generation
+- enterprise knowledge base retrieval
